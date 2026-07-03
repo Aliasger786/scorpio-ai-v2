@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "ScorpioAI – AI Revenue Operating System"
+version = "1.0.0"
+id = "artifacts/scorpio-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21810
+
+[services.development]
+run = "pnpm --filter @workspace/scorpio-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/scorpio-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/scorpio-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21810"
+BASE_PATH = "/"
