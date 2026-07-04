@@ -1,13 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Github } from 'lucide-react';
 import { SiGoogle } from 'react-icons/si';
 
 export default function Login() {
+  const [, setLocation] = useLocation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     document.title = "ScorpioAI | Login";
   }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Mock authentication - in production, this would call an API
+    setTimeout(() => {
+      localStorage.setItem('auth_token', 'mock_token_' + Date.now());
+      localStorage.setItem('user_email', email);
+      setLocation('/dashboard');
+      setIsLoading(false);
+    }, 500);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
@@ -28,11 +46,13 @@ export default function Login() {
         </div>
 
         <GlassCard className="p-8" hoverGlow={false}>
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-5" onSubmit={handleLogin}>
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">Email Address</label>
               <input 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" 
                 placeholder="name@company.com"
                 required
@@ -46,14 +66,20 @@ export default function Login() {
               </div>
               <input 
                 type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" 
                 placeholder="••••••••"
                 required
               />
             </div>
             
-            <button type="submit" className="w-full py-3.5 rounded-lg bg-primary text-white font-bold hover:scale-[1.02] transition-transform glow-purple">
-              Sign In
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="w-full py-3.5 rounded-lg bg-primary text-white font-bold hover:scale-[1.02] transition-transform glow-purple disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
