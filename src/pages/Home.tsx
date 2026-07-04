@@ -115,7 +115,7 @@ export default function Home() {
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-[#0A0A0A]">
         <HeroBackground />
         
-        <div className="container relative z-10 mx-auto px-4 text-center flex flex-col items-center">
+        <div className="container relative z-10 mx-auto px-4 text-center flex flex-col items-center pt-20">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 max-w-5xl leading-[1.1]">
             {"AI Employees That Grow Your Business 24/7".split(" ").map((word, i) => (
               <span key={i} className="inline-block overflow-hidden pb-2 mr-4 md:mr-6">
