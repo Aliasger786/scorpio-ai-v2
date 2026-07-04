@@ -22,7 +22,7 @@ export default function Login() {
     setTimeout(() => {
       localStorage.setItem('auth_token', 'mock_token_' + Date.now());
       localStorage.setItem('user_email', email);
-      setLocation('/dashboard');
+      setLocation('/'); // Redirect to home for now since dashboard doesn't exist yet
       setIsLoading(false);
     }, 500);
   };
