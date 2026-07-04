@@ -25,6 +25,7 @@ import Register from '@/pages/Register';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import NotFound from '@/pages/not-found';
+import { DashboardOverview } from './pages/dashboard/DashboardOverview';
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ function Router() {
           <Route path="/register" component={Register} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />
+          <Route path="/dashboard" component={DashboardOverview} />
           <Route component={NotFound} />
         </Switch>
       </main>
