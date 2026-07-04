@@ -116,10 +116,6 @@ export default function Home() {
         <HeroBackground />
         
         <div className="container relative z-10 mx-auto px-4 text-center flex flex-col items-center">
-          <Badge variant="purple" className="mb-6 animate-fade-in text-sm px-4 py-1.5 border-primary/50 bg-primary/10">
-            ScorpioAI Platform v2.0 is live
-          </Badge>
-          
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 max-w-5xl leading-[1.1]">
             {"AI Employees That Grow Your Business 24/7".split(" ").map((word, i) => (
               <span key={i} className="inline-block overflow-hidden pb-2 mr-4 md:mr-6">
@@ -136,6 +132,10 @@ export default function Home() {
           >
             ScorpioAI deploys autonomous AI agents that capture leads, recover carts, support customers, and generate revenue — around the clock, without a team.
           </motion.p>
+
+          <Badge variant="purple" className="mb-6 animate-fade-in text-sm px-4 py-1.5 border-primary/50 bg-primary/10">
+            ScorpioAI Platform v2.0 is live
+          </Badge>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
