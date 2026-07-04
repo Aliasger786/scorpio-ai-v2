@@ -24,7 +24,7 @@ export default function Register() {
       localStorage.setItem('user_email', email);
       localStorage.setItem('user_name', name);
       localStorage.setItem('user_company', company);
-      setLocation('/'); // Redirect to home for now since dashboard doesn't exist yet
+      setLocation('/dashboard');
       setIsLoading(false);
     }, 500);
   };

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -25,14 +25,19 @@ import Register from '@/pages/Register';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import NotFound from '@/pages/not-found';
-import { DashboardOverview } from './pages/dashboard/DashboardOverview';
+import { DashboardPage } from './pages/dashboard/DashboardOverview';
 
 const queryClient = new QueryClient();
 
 function Router() {
+  const [location] = useLocation();
+  const isDashboardRoute = location.startsWith('/dashboard');
+  const isAuthRoute = location === '/login' || location === '/register';
+  const showSiteChrome = !isDashboardRoute && !isAuthRoute;
+
   return (
     <div className="flex flex-col min-h-[100dvh] w-full">
-      <Navbar />
+      {showSiteChrome && <Navbar />}
       <main className="flex-grow w-full">
         <Switch>
           <Route path="/" component={Home} />
@@ -52,11 +57,22 @@ function Router() {
           <Route path="/register" component={Register} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />
-          <Route path="/dashboard" component={DashboardOverview} />
+          <Route path="/dashboard/agents" component={() => <DashboardPage section="agents" />} />
+          <Route path="/dashboard/leads" component={() => <DashboardPage section="leads" />} />
+          <Route path="/dashboard/conversations" component={() => <DashboardPage section="conversations" />} />
+          <Route path="/dashboard/analytics" component={() => <DashboardPage section="analytics" />} />
+          <Route path="/dashboard/workflows" component={() => <DashboardPage section="workflows" />} />
+          <Route path="/dashboard/integrations" component={() => <DashboardPage section="integrations" />} />
+          <Route path="/dashboard/api-keys" component={() => <DashboardPage section="api-keys" />} />
+          <Route path="/dashboard/billing" component={() => <DashboardPage section="billing" />} />
+          <Route path="/dashboard/settings" component={() => <DashboardPage section="settings" />} />
+          <Route path="/dashboard/team" component={() => <DashboardPage section="team" />} />
+          <Route path="/dashboard/support" component={() => <DashboardPage section="support" />} />
+          <Route path="/dashboard" component={() => <DashboardPage section="overview" />} />
           <Route component={NotFound} />
         </Switch>
       </main>
-      <Footer />
+      {showSiteChrome && <Footer />}
     </div>
   );
 }

@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const menuItems = [
+export const menuItems = [
   { icon: LayoutDashboard, label: 'Overview', path: '/dashboard' },
   { icon: Bot, label: 'AI Agents', path: '/dashboard/agents' },
   { icon: Users, label: 'Leads', path: '/dashboard/leads' },
@@ -33,12 +33,14 @@ const menuItems = [
 ];
 
 export function Sidebar() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user_email');
-    window.location.href = '/login';
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_company');
+    setLocation('/login');
   };
 
   return (
@@ -60,7 +62,7 @@ export function Sidebar() {
           <ul className="space-y-1 px-3">
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location === item.path;
+              const isActive = item.path === '/dashboard' ? location === item.path : location.startsWith(item.path);
               return (
                 <li key={item.path}>
                   <Link
