@@ -6,3 +6,8 @@
   NODE_VERSION = "22"
   YARN_VERSION = "1.22.22"
   NPM_FLAGS = "--legacy-peer-deps"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
