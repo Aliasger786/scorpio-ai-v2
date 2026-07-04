@@ -1,6 +1,6 @@
 [build]
-  command = "yarn install && yarn workspace @workspace/scorpio-ai build"
-  publish = "/public"
+  command = "yarn install && yarn build"
+  publish = "dist/public"
 
 [build.environment]
   NODE_VERSION = "22"
